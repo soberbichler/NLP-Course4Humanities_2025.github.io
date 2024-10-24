@@ -24,6 +24,6 @@ The course covers the following topics:
 
 - `index.html`: Main page of the course
 - `styles.css`: CSS stylesheet for the course website
-- `materials/`: Folder for course materials and resources
+- `datasets/`: Folder for course materials and resources
 
 ## License
