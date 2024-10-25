@@ -3,123 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Glossary</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <title>Glossary</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        .container {
-            display: flex;
-            max-width: 1000px;
-            margin: 0 auto;
-            gap: 20px;
-        }
-        .column {
-            background-color: #ffffff;
-            padding: 15px;
-            border-radius: 4px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .side-column-left {
-            flex: 1;
-        }
-        .side-column-right {
-            flex: 0 0 150px;
-        }
-        .main-column {
-            flex: 2;
-        }
-        h1, h2 {
-            color: #444;
-            margin-top: 0;
-            font-weight: normal;
-        }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        h2 {
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 6px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
-        textarea {
-            height: 80px;
-            resize: vertical;
-        }
-        button, input[type="submit"] {
-            background-color: #f0f0f0;
-            color: #333;
-            padding: 6px 10px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-        button:hover, input[type="submit"]:hover {
-            background-color: #e0e0e0;
-        }
-        .glossary-section {
-            margin-bottom: 15px;
-        }
-        .section-header {
-            font-size: 16px;
-            font-weight: bold;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 8px;
-            padding-bottom: 3px;
-        }
-        .glossary-item {
-            margin-bottom: 8px;
-            padding: 3px 0;
-            font-size: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-        }
-        .term {
-            font-weight: bold;
-            margin-right: 5px;
-        }
-        .delete-button {
-            padding: 2px 5px;
-            font-size: 11px;
-        }
-        #notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            border-radius: 4px;
-            display: none;
-        }
-        .success {
-            background-color: #4CAF50;
-            color: white;
-        }
-        .error {
-            background-color: #f44336;
-            color: white;
-        }
+        /* ... your existing styles ... */
     </style>
 </head>
 <body>
-    <div id="notification"></div>
-    <h1>Course Glossary</h1>
+    <h1>Glossary</h1>
     <div class="container">
         <div class="column side-column-left">
             <h2>Add New Term</h2>
@@ -130,7 +20,7 @@
             </form>
         </div>
         <div class="column main-column">
-            <h2>Glossary</h2>
+            <h2>Glossary List</h2>
             <div id="glossaryList"></div>
         </div>
         <div class="column side-column-right">
@@ -140,130 +30,111 @@
     </div>
 
     <script>
-        // Initialize Supabase client
-        const supabaseUrl = 'https://itpqpqtvtpdyraookiqf.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml0cHFwcXR2dHBkeXJhb29raXFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk4NTc5MjYsImV4cCI6MjA0NTQzMzkyNn0.WVVtHy1spmEjl3_A2i8jEETyzgxmyAFM7yGhJ3oSp5w';
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
-        let glossary = [];
         const glossaryForm = document.getElementById('glossaryForm');
         const glossaryList = document.getElementById('glossaryList');
         const searchInput = document.getElementById('searchInput');
-        const notification = document.getElementById('notification');
+        let glossary = [];
 
-        function showNotification(message, type) {
-            notification.textContent = message;
-            notification.className = type;
-            notification.style.display = 'block';
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 3000);
-        }
-
-        // Load glossary data from Supabase
-        async function loadGlossary() {
-            try {
-                const { data, error } = await supabase
-                    .from('glossary_entries')
-                    .select('*')
-                    .order('term');
-                
-                if (error) throw error;
-                
-                glossary = data;
-                updateGlossaryDisplay();
-            } catch (error) {
-                console.error('Error loading glossary:', error);
-                showNotification('Error loading glossary', 'error');
+        function loadGlossary() {
+            console.log('Loading glossary from localStorage');
+            const savedGlossary = localStorage.getItem('glossary');
+            if (savedGlossary) {
+                console.log('Found saved glossary:', savedGlossary);
+                glossary = JSON.parse(savedGlossary);
             }
+            updateGlossaryDisplay();
         }
 
-        // Subscribe to real-time changes
-        const subscription = supabase
-            .channel('glossary_changes')
-            .on('postgres_changes', 
-                { event: '*', schema: 'public', table: 'glossary_entries' }, 
-                loadGlossary
-            )
-            .subscribe();
+        function saveGlossary() {
+            console.log('Saving glossary:', glossary);
+            localStorage.setItem('glossary', JSON.stringify(glossary));
+        }
 
-        glossaryForm.addEventListener('submit', async function(event) {
+        glossaryForm.addEventListener('submit', function(event) {
             event.preventDefault();
-            const term = document.getElementById('term').value.trim();
-            const definition = document.getElementById('definition').value.trim();
+            console.log('Form submitted');
             
-            try {
-                const { error } = await supabase
-                    .from('glossary_entries')
-                    .insert([{ term, definition }]);
-                
-                if (error) throw error;
-                
-                glossaryForm.reset();
-                showNotification('Term added successfully', 'success');
-            } catch (error) {
-                console.error('Error adding term:', error);
-                showNotification('Error adding term', 'error');
-            }
+            const term = document.getElementById('term').value;
+            const definition = document.getElementById('definition').value;
+            
+            console.log('Adding new term:', { term, definition });
+            
+            const newEntry = {
+                term: term.trim(),
+                definition: definition.trim(),
+                id: Date.now()
+            };
+            
+            glossary.push(newEntry);
+            console.log('Updated glossary:', glossary);
+            
+            saveGlossary();
+            updateGlossaryDisplay();
+            
+            glossaryForm.reset();
         });
 
-        searchInput.addEventListener('input', updateGlossaryDisplay);
+        searchInput.addEventListener('input', function() {
+            console.log('Search input:', searchInput.value);
+            updateGlossaryDisplay();
+        });
 
         function updateGlossaryDisplay() {
+            console.log('Updating display with glossary:', glossary);
+            
             const searchTerm = searchInput.value.toLowerCase();
-            const filteredGlossary = glossary
-                .filter(item => 
-                    item.term.toLowerCase().includes(searchTerm) || 
-                    item.definition.toLowerCase().includes(searchTerm)
-                )
-                .sort((a, b) => a.term.localeCompare(b.term));
+            const filteredGlossary = glossary.filter(item => 
+                item.term.toLowerCase().includes(searchTerm) || 
+                item.definition.toLowerCase().includes(searchTerm)
+            );
+
+            console.log('Filtered glossary:', filteredGlossary);
+
+            glossaryList.innerHTML = '';
+            filteredGlossary.sort((a, b) => a.term.localeCompare(b.term));
             
             const sections = {};
+            
             filteredGlossary.forEach(item => {
                 const firstLetter = item.term[0].toUpperCase();
-                if (!sections[firstLetter]) sections[firstLetter] = [];
+                if (!sections[firstLetter]) {
+                    sections[firstLetter] = [];
+                }
                 sections[firstLetter].push(item);
             });
             
-            glossaryList.innerHTML = '';
+            console.log('Organized sections:', sections);
+            
             Object.keys(sections).sort().forEach(letter => {
-                const section = document.createElement('div');
-                section.className = 'glossary-section';
-                section.innerHTML = `<div class="section-header">${letter}</div>`;
+                const sectionElement = document.createElement('div');
+                sectionElement.className = 'glossary-section';
+                sectionElement.innerHTML = `<div class="section-header">${letter}</div>`;
                 
                 sections[letter].forEach(item => {
-                    const itemDiv = document.createElement('div');
-                    itemDiv.className = 'glossary-item';
-                    itemDiv.innerHTML = `
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'glossary-item';
+                    itemElement.innerHTML = `
                         <div><span class="term">${item.term}:</span> ${item.definition}</div>
                         <button class="delete-button" onclick="deleteEntry(${item.id})">Delete</button>
                     `;
-                    section.appendChild(itemDiv);
+                    sectionElement.appendChild(itemElement);
                 });
                 
-                glossaryList.appendChild(section);
+                glossaryList.appendChild(sectionElement);
             });
         }
 
-        async function deleteEntry(id) {
+        function deleteEntry(id) {
+            console.log('Deleting entry:', id);
             if (confirm("Are you sure you want to delete this entry?")) {
-                try {
-                    const { error } = await supabase
-                        .from('glossary_entries')
-                        .delete()
-                        .eq('id', id);
-                    
-                    if (error) throw error;
-                    
-                    showNotification('Term deleted successfully', 'success');
-                } catch (error) {
-                    console.error('Error deleting term:', error);
-                    showNotification('Error deleting term', 'error');
-                }
+                glossary = glossary.filter(item => item.id !== id);
+                console.log('Glossary after deletion:', glossary);
+                saveGlossary();
+                updateGlossaryDisplay();
             }
         }
 
-        // Initial load
+        console.log('Starting application');
         loadGlossary();
     </script>
 </body>
