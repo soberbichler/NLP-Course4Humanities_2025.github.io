@@ -5,25 +5,137 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glossary</title>
     <style>
-        /* ... your existing styles ... */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .section {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .add-section {
+            flex: 1;
+            min-width: 300px;
+        }
+        .glossary-section {
+            flex: 2;
+            min-width: 500px;
+        }
+        .search-section {
+            flex: 1;
+            min-width: 300px;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #34495e;
+            font-size: 24px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        button, input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover, input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        .delete-button {
+            background-color: #e74c3c;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+        .glossary-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .glossary-item:last-child {
+            border-bottom: none;
+        }
+        .term {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #2c3e50;
+        }
+        .definition {
+            flex: 1;
+            margin-right: 20px;
+            line-height: 1.5;
+        }
+        .letter-section {
+            margin-bottom: 30px;
+        }
+        .letter-header {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #3498db;
+        }
     </style>
 </head>
 <body>
     <h1>Glossary</h1>
     <div class="container">
-        <div class="column side-column-left">
+        <div class="section add-section">
             <h2>Add New Term</h2>
             <form id="glossaryForm">
-                <input type="text" id="term" name="term" placeholder="Term" required>
-                <textarea id="definition" name="definition" placeholder="Definition" required></textarea>
-                <input type="submit" value="Add">
+                <input type="text" id="term" placeholder="Term" required>
+                <textarea id="definition" placeholder="Definition" required></textarea>
+                <button type="submit">Add Term</button>
             </form>
         </div>
-        <div class="column main-column">
+        
+        <div class="section glossary-section">
             <h2>Glossary List</h2>
             <div id="glossaryList"></div>
         </div>
-        <div class="column side-column-right">
+        
+        <div class="section search-section">
             <h2>Search</h2>
             <input type="text" id="searchInput" placeholder="Type to search...">
         </div>
@@ -36,63 +148,45 @@
         let glossary = [];
 
         function loadGlossary() {
-            console.log('Loading glossary from localStorage');
             const savedGlossary = localStorage.getItem('glossary');
             if (savedGlossary) {
-                console.log('Found saved glossary:', savedGlossary);
                 glossary = JSON.parse(savedGlossary);
             }
             updateGlossaryDisplay();
         }
 
         function saveGlossary() {
-            console.log('Saving glossary:', glossary);
             localStorage.setItem('glossary', JSON.stringify(glossary));
         }
 
         glossaryForm.addEventListener('submit', function(event) {
             event.preventDefault();
-            console.log('Form submitted');
-            
             const term = document.getElementById('term').value;
             const definition = document.getElementById('definition').value;
             
-            console.log('Adding new term:', { term, definition });
-            
-            const newEntry = {
+            glossary.push({
                 term: term.trim(),
                 definition: definition.trim(),
                 id: Date.now()
-            };
-            
-            glossary.push(newEntry);
-            console.log('Updated glossary:', glossary);
+            });
             
             saveGlossary();
             updateGlossaryDisplay();
-            
             glossaryForm.reset();
         });
 
-        searchInput.addEventListener('input', function() {
-            console.log('Search input:', searchInput.value);
-            updateGlossaryDisplay();
-        });
+        searchInput.addEventListener('input', updateGlossaryDisplay);
 
         function updateGlossaryDisplay() {
-            console.log('Updating display with glossary:', glossary);
-            
             const searchTerm = searchInput.value.toLowerCase();
-            const filteredGlossary = glossary.filter(item => 
-                item.term.toLowerCase().includes(searchTerm) || 
-                item.definition.toLowerCase().includes(searchTerm)
-            );
-
-            console.log('Filtered glossary:', filteredGlossary);
+            const filteredGlossary = glossary
+                .filter(item => 
+                    item.term.toLowerCase().includes(searchTerm) || 
+                    item.definition.toLowerCase().includes(searchTerm)
+                )
+                .sort((a, b) => a.term.localeCompare(b.term));
 
             glossaryList.innerHTML = '';
-            filteredGlossary.sort((a, b) => a.term.localeCompare(b.term));
-            
             const sections = {};
             
             filteredGlossary.forEach(item => {
@@ -103,18 +197,19 @@
                 sections[firstLetter].push(item);
             });
             
-            console.log('Organized sections:', sections);
-            
             Object.keys(sections).sort().forEach(letter => {
                 const sectionElement = document.createElement('div');
-                sectionElement.className = 'glossary-section';
-                sectionElement.innerHTML = `<div class="section-header">${letter}</div>`;
+                sectionElement.className = 'letter-section';
+                sectionElement.innerHTML = `<div class="letter-header">${letter}</div>`;
                 
                 sections[letter].forEach(item => {
                     const itemElement = document.createElement('div');
                     itemElement.className = 'glossary-item';
                     itemElement.innerHTML = `
-                        <div><span class="term">${item.term}:</span> ${item.definition}</div>
+                        <div class="definition">
+                            <span class="term">${item.term}:</span> 
+                            ${item.definition}
+                        </div>
                         <button class="delete-button" onclick="deleteEntry(${item.id})">Delete</button>
                     `;
                     sectionElement.appendChild(itemElement);
@@ -122,19 +217,20 @@
                 
                 glossaryList.appendChild(sectionElement);
             });
+
+            if (filteredGlossary.length === 0) {
+                glossaryList.innerHTML = '<p style="text-align: center; color: #666;">No terms found.</p>';
+            }
         }
 
         function deleteEntry(id) {
-            console.log('Deleting entry:', id);
             if (confirm("Are you sure you want to delete this entry?")) {
                 glossary = glossary.filter(item => item.id !== id);
-                console.log('Glossary after deletion:', glossary);
                 saveGlossary();
                 updateGlossaryDisplay();
             }
         }
 
-        console.log('Starting application');
         loadGlossary();
     </script>
 </body>
