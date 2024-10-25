@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glossary</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -65,7 +66,7 @@
             height: 100px;
             resize: vertical;
         }
-        button, input[type="submit"] {
+        button {
             background-color: #3498db;
             color: white;
             padding: 10px 20px;
@@ -75,7 +76,7 @@
             font-size: 16px;
             transition: background-color 0.3s ease;
         }
-        button:hover, input[type="submit"]:hover {
+        button:hover {
             background-color: #2980b9;
         }
         .delete-button {
@@ -104,7 +105,6 @@
         .definition {
             flex: 1;
             margin-right: 20px;
-            line-height: 1.5;
         }
         .letter-section {
             margin-bottom: 30px;
@@ -116,9 +116,25 @@
             padding-bottom: 5px;
             border-bottom: 2px solid #3498db;
         }
+        #notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            border-radius: 4px;
+            display: none;
+            color: white;
+        }
+        .success {
+            background-color: #2ecc71;
+        }
+        .error {
+            background-color: #e74c3c;
+        }
     </style>
 </head>
 <body>
+    <div id="notification"></div>
     <h1>Glossary</h1>
     <div class="container">
         <div class="section add-section">
@@ -142,37 +158,71 @@
     </div>
 
     <script>
+        // Initialize Supabase client
+        const supabaseUrl = 'https://itpqpqtvtpdyraookiqf.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml0cHFwcXR2dHBkeXJhb29raXFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk4NTc5MjYsImV4cCI6MjA0NTQzMzkyNn0.WVVtHy1spmEjl3_A2i8jEETyzgxmyAFM7yGhJ3oSp5w';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
         const glossaryForm = document.getElementById('glossaryForm');
         const glossaryList = document.getElementById('glossaryList');
         const searchInput = document.getElementById('searchInput');
+        const notification = document.getElementById('notification');
         let glossary = [];
 
-        function loadGlossary() {
-            const savedGlossary = localStorage.getItem('glossary');
-            if (savedGlossary) {
-                glossary = JSON.parse(savedGlossary);
+        function showNotification(message, type) {
+            notification.textContent = message;
+            notification.className = type;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Load glossary data
+        async function loadGlossary() {
+            try {
+                const { data, error } = await supabase
+                    .from('glossary_entries')
+                    .select('*')
+                    .order('term');
+                
+                if (error) throw error;
+                
+                glossary = data;
+                updateGlossaryDisplay();
+            } catch (error) {
+                console.error('Error loading glossary:', error);
+                showNotification('Error loading glossary', 'error');
             }
-            updateGlossaryDisplay();
         }
 
-        function saveGlossary() {
-            localStorage.setItem('glossary', JSON.stringify(glossary));
-        }
+        // Subscribe to real-time changes
+        const subscription = supabase
+            .channel('glossary_changes')
+            .on('postgres_changes', 
+                { event: '*', schema: 'public', table: 'glossary_entries' }, 
+                loadGlossary
+            )
+            .subscribe();
 
-        glossaryForm.addEventListener('submit', function(event) {
+        glossaryForm.addEventListener('submit', async function(event) {
             event.preventDefault();
-            const term = document.getElementById('term').value;
-            const definition = document.getElementById('definition').value;
+            const term = document.getElementById('term').value.trim();
+            const definition = document.getElementById('definition').value.trim();
             
-            glossary.push({
-                term: term.trim(),
-                definition: definition.trim(),
-                id: Date.now()
-            });
-            
-            saveGlossary();
-            updateGlossaryDisplay();
-            glossaryForm.reset();
+            try {
+                const { error } = await supabase
+                    .from('glossary_entries')
+                    .insert([{ term, definition }]);
+                
+                if (error) throw error;
+                
+                glossaryForm.reset();
+                showNotification('Term added successfully', 'success');
+            } catch (error) {
+                console.error('Error adding term:', error);
+                showNotification('Error adding term', 'error');
+            }
         });
 
         searchInput.addEventListener('input', updateGlossaryDisplay);
@@ -223,14 +273,25 @@
             }
         }
 
-        function deleteEntry(id) {
+        async function deleteEntry(id) {
             if (confirm("Are you sure you want to delete this entry?")) {
-                glossary = glossary.filter(item => item.id !== id);
-                saveGlossary();
-                updateGlossaryDisplay();
+                try {
+                    const { error } = await supabase
+                        .from('glossary_entries')
+                        .delete()
+                        .eq('id', id);
+                    
+                    if (error) throw error;
+                    
+                    showNotification('Term deleted successfully', 'success');
+                } catch (error) {
+                    console.error('Error deleting term:', error);
+                    showNotification('Error deleting term', 'error');
+                }
             }
         }
 
+        // Initial load
         loadGlossary();
     </script>
 </body>
