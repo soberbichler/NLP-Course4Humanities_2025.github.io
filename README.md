@@ -14,10 +14,10 @@ This course offers an introduction to Natural Language Processing (NLP) and its 
 
 The course covers the following topics:
 - Introduction to NLP, Jupyter Notebooks, and Python
-- Using SpaCy for NLP tasks
-- Introduction: German Newspaper Portal and its API
-- Recent advances in NLP: Transformer models for semantic search and text similarity (Word Embeddings)
-- Recent advances in NLP: Large Language Models (LLMs) for Semantic Text Extraction (Article Segmentation) and Post-OCR Correction
+- Using SpaCy, SKLEARN and NLTK for NLP tasks
+- German Newspaper Portal and its API
+- Transformer models for semantic search and text similarity (Word Embeddings)
+- Large Language Models (LLMs) for Semantic Text Extraction (Article Extraction) and Post-OCR Correction
 - Named Entity Recognition (NER) and Text Classification
 
 ## Repository Structure
