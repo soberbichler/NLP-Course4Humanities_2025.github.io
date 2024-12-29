@@ -20,10 +20,13 @@
             color: #8B0000;
         }
         .notebook-link {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 10px;
-            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        .notebook-title {
+            font-weight: 500;
+            min-width: 300px;
         }
         .back-button {
             position: fixed;
@@ -38,6 +41,12 @@
         }
         .task {
             margin-bottom: 15px;
+        }
+        .link-section {
+            margin-bottom: 20px;
+        }
+        .link-section p {
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -60,26 +69,28 @@
         </ul>
         
         <h3>Link to the Material of the German Digital Library:</h3>
-        <p>GitHub Repositorium:</p>
+        <div class="link-section">
+            <p><strong>GitHub Repository:</strong></p>
             <p><a href="https://github.com/Deutsche-Digitale-Bibliothek/ddblabs-summer-school-2024">https://github.com/Deutsche-Digitale-Bibliothek/ddblabs-summer-school-2024</a></p>
-        <p>Open Notebooks in Colab:</p>
+            <p><strong>Open Notebooks in Colab:</strong></p>
             <p><a href="https://colab.research.google.com/github/Deutsche-Digitale-Bibliothek/ddblabs-summer-school-2024/blob/main">https://colab.research.google.com/github/Deutsche-Digitale-Bibliothek/ddblabs-summer-school-2024/blob/main</a></p>
+        </div>
+
         <h3>Course Notebook for API search and CSV/Excel Download:</h3>
+        <div class="notebook-links">
             <div class="notebook-link">
-             <p>Download über API der DDB</p>
+                <span class="notebook-title">Download über API der DDB</span>
                 <a href="https://colab.research.google.com/github/ieg-dhr/NLP-Course4Humanities_2024/blob/main/Download_über_API_der_DDB.ipynb" target="_blank">
                     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Download_über_API_der_DDB.ipynb In Colab"/>
-        
                 </a>
             </div>
+        </div>
             
         <h3>Workload (after class):</h3>
-         <ol>
+        <ol>
             <li>
                 <p>Together with your course partner, decide on a research topic and question that aligns with the main course topic: Natural Disasters in Historical Newspapers. Use the German Digital Newspaper Portal (Deutsches Zeitungsportal) to explore available historical newspapers. Potential topics and research questions could include:</p>
                 <ul>
-    
-                    
                     <li>The Heat Crisis of 1911:<br>
                         - Which crops are most frequently mentioned in crisis reporting across different regions?</li>
                     
@@ -92,12 +103,12 @@
                     <li>Natural Disasters in War Time:<br>
                         - How did wartime conditions influence disaster reporting and response?</li>
                         
-                     <li>The 1910 European floods:<br>
+                    <li>The 1910 European floods:<br>
                         - Which types of infrastructure (bridges, railways, sewers, etc.) were reported about and how were future improvements discussed?</li>
                 </ul>
             </li>
+            <li>Create a HuggingFace Token if not already done (Instructions in link list)</li>
         </ol>
-        <p>2. Create a HuggingFace Token if not already done (Instructions in link list)</p>
         
         <h3>Date and Time:</h3>
         <p>November 15, 2024 (10:00 AM to 11:30 AM)</p>
