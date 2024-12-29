@@ -20,10 +20,13 @@
             color: #8B0000;
         }
         .notebook-link {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 10px;
-            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        .notebook-title {
+            font-weight: 500;
+            min-width: 300px;
         }
         .back-button {
             position: fixed;
@@ -59,32 +62,35 @@
         </p>
         
         <h3>Notebooks we will use in class:</h3>
-        <div class="notebook-link">
-            <p>Python CrashCourse 2</p>
-            <a href="https://colab.research.google.com/github/ieg-dhr/NLP-Course4Humanities_2024/blob/main/Python_CrashCourse_2.ipynb" target="_blank">
-                <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open Python_CrashCourse_1 In Colab"/>
-            </a>
-        </div>
-        <br>
-        <div class="notebook-link">
-            <p>Data Detective NLP Introduction</p>
-            <a href="https://colab.research.google.com/github/ieg-dhr/NLP-Course4Humanities_2024/blob/main/Data_Detective_NLP_Introduction.ipynb" target="_blank">
-                <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open Python_CrashCourse_1 In Colab"/>
-            </a>
+        <div class="notebook-links">
+            <div class="notebook-link">
+                <span class="notebook-title">Python Crash Course 2</span>
+                <a href="https://colab.research.google.com/github/ieg-dhr/NLP-Course4Humanities_2024/blob/main/Python_CrashCourse_2.ipynb" target="_blank">
+                    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Python_CrashCourse_2.ipynb In Colab"/>
+                </a>
+            </div>
+
+            <div class="notebook-link">
+                <span class="notebook-title">Data Detective NLP Introduction</span>
+                <a href="https://colab.research.google.com/github/ieg-dhr/NLP-Course4Humanities_2024/blob/main/Data_Detective_NLP_Introduction.ipynb" target="_blank">
+                    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Data_Detective_NLP_Introduction.ipynb In Colab"/>
+                </a>
+            </div>
         </div>
         
         <h3>Workload (after class):</h3>
         <p>Finish the exercises of the Python Crash Course (if not finished in class)</p>
         <p>Create your first Jupyter notebook, clone our course repository, and import kölnische_Zeitung_erdbeben_artikel.xlsx.</p>
    
-       <p>Complete the following tasks:</p>
-       <ol>
-           <li>Clean, tokenizem and lemmatize the corpus</li>
-           <li>Find the most frequent verbs (use the NLTK package for this task)</li>
-           <li>Visualize the most frequent verbs with a visualization of your choice</li>
-       </ol>
+        <p>Complete the following tasks:</p>
+        <ol>
+            <li>Clean, tokenize, and lemmatize the corpus</li>
+            <li>Find the most frequent verbs (use the NLTK package for this task)</li>
+            <li>Visualize the most frequent verbs with a visualization of your choice</li>
+        </ol>
        
-       <p>Save your notebook in your GitHub repository.</p>
+        <p>Save your notebook in your GitHub repository.</p>
+        
         <h3>Date and Time:</h3>
         <p>November 8, 2024 (10:00 AM to 11:30 AM)</p>
     </div>
