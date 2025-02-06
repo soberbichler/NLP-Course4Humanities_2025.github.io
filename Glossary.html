@@ -96,24 +96,96 @@
 
     <script>
         const glossaryData = [
-            {"term": "ALPAC Report", "definition": "A 34-page report accompanied by twenty appendices released by the Automatic Language Processing Advisory Committee (ALPAC) in November 1966 under the title "Languages and machines: computers in translation and linguistics" to evaluate the demands of U.S. government officials and researchers regarding the translation of Russian-language documents into English."},
-            {"term": "BERT", "definition": "Bi-directional Encoder Representations from Transformers (BERT) is a pre-trained model with unlabeled text available on BookCorpus and English Wikipedia. This can be fine-tuned to capture context for various NLP tasks such as question answering, sentiment analysis, text classification, sentence embedding, interpreting ambiguity in the text etc."},
-            {"term": "BLEU", "definition": "The BLEU (BiLingual Evaluation Understudy) score is a metric for evaluating an NLP model's performance. Each word in the output sentence is scored based on its presence in one of the reference sentences."},
-            {"term": "Chunking", "definition": "Chunking is a process of separating phrases from unstructured text. Since simple tokens may not represent the actual meaning of the text, it is advisable to use phrases such as "North Africa" as a single word instead of 'North' and 'Africa' separate words."},
-            {"term": "Data Corpora", "definition": "Collections of structured linguistic data that serve as essential resources in NLP and computational linguistics. These corpora, often comprising written texts or transcribed speech, are used to train, test, and benchmark NLP models."},
-            {"term": "Fine-tuning", "definition": "A process where a pre-trained machine learning model is further trained on a specific task or domain with a smaller dataset. This adapts the general capabilities of the model to specialized applications while leveraging prior knowledge from the initial training phase."},
-            {"term": "LSTM", "definition": "Long Short-Term Memory (LSTM) is a type of Recurrent Neural Network (RNN) designed to better retain essential information over longer sequences, making it suitable for applications where long-term dependencies are key, such as text and speech processing."},
-            {"term": "Machine Translation", "definition": "The process of translating phrases from one language to another. The general underlying principles include statistical analyses of language data sets, artificial neural networks and Deep learning."},
-            {"term": "Natural Language Processing (NLP)", "definition": "A branch of Artificial Intelligence and Linguistics that enables computers to process, understand, and interact with human language. It consists of Natural Language Understanding (NLU) for comprehending input, and Natural Language Generation (NLG) for producing output."},
-            {"term": "Neural Networks", "definition": "A class of machine learning algorithms inspired by the structure of the human brain. They consist of multiple interconnected 'neurons' organized in layers, enabling them to recognize complex patterns in data."},
-            {"term": "Part-of-speech (POS) tagging", "definition": "A vital component of NLP, in which each word in a text receives a syntactic tag according to lexical categories such as nouns, verbs, and adjectives, based on the context of a sentence."},
-            {"term": "Sentiment analysis", "definition": "A process of extracting sentiments from text. This analysis method can vary from simple sentiment classification (negative, neutral, or positive) to more descriptive techniques such as targeted sentiment, which investigates opinions regarding specific entities."},
-            {"term": "Transformers", "definition": "Large multi-layer neural networks considered a Deep learning architecture. Introduced in 2017, it is used in well-known large language models such as OpenAI's GPT products or Meta's LLaMA."},
-            {"term": "Word Embedding", "definition": "A method of representing words and documents in numerical form. Through them it is possible to approximate a word's meaning in a lower-dimensional space with the help of these embeddings."},
-            {"term": "XAI", "definition": "Abbreviation for Explainable Artificial Intelligence, which outlines a focus on analyzing, modeling, and communicating the processes underlying AI algorithms in order to better comprehend deep learning Transformer models."}
+            {
+                term: "Natural Language Processing (NLP)",
+                definition: "A branch of Artificial Intelligence and Linguistics that enables computers to process, understand, and interact with human language. It consists of two main components: Natural Language Understanding (NLU), which focuses on comprehending human language input, and Natural Language Generation (NLG), which deals with producing human-readable text output."
+            },
+            {
+                term: "ALPAC Report",
+                definition: "A 34-page report accompanied by twenty appendices released by the Automatic Language Processing Advisory Committee (ALPAC) in November 1966 under the title "Languages and machines: computers in translation and linguistics" to evaluate the demands of U.S. government officials and researchers regarding the translation of Russian-language documents into English."
+            },
+            {
+                term: "Part-of-speech (POS) tagging",
+                definition: "A vital component and implementation of NLP, in which each word in a text receives a syntactic tag according to lexical categories such as nouns, verbs, and adjectives, among others, based on the context of a sentence. This procedure is also known as grammatical tagging."
+            },
+            {
+                term: "Semantic Role Labeling (SRL)",
+                definition: "A task of NLP centered on assigning semantic roles to words and phrases as arguments related to the predicate, or main verb phrase of a sentence composed of a verb as well as associated objects and modifiers."
+            },
+            {
+                term: "Sentiment analysis",
+                definition: "A process of extracting sentiments from a text that is essential to NLP. Also known as opinion mining, this analysis method can vary in complexity from sentiment classification using the categories negative, neutral, or positive to more descriptive techniques."
+            },
+            {
+                term: "Long Short-Term Memory (LSTM)",
+                definition: "A type of Recurrent Neural Network (RNN) designed to better retain essential information over longer sequences, making it suitable for applications where long-term dependencies are key, such as text and speech processing."
+            },
+            {
+                term: "GLUE Score",
+                definition: "General Language Understanding Evaluation (GLUE) is a benchmarking suite for evaluating NLP models on their general language understanding capabilities across various tasks. GLUE includes nine diverse NLP tasks that test a model's ability to perform on tasks such as sentiment analysis and textual entailment."
+            },
+            {
+                term: "Naive Bayes Classifiers",
+                definition: "Probabilistic algorithms that apply Bayes' Theorem to classify data by predicting the probability of a label given certain features. In NLP, these classifiers are commonly used in text classification tasks such as spam detection and sentiment analysis."
+            },
+            {
+                term: "Sequence-to-Sequence Mapping",
+                definition: "A framework where encoder and decoder networks are used to map from sequence to vector and vector to sequence respectively. Many NLP problems are sequential as the end of the computed text or speech is not known."
+            },
+            {
+                term: "Chunking",
+                definition: "A process of separating phrases from unstructured text. Since simple tokens may not represent the actual meaning of the text, it labels parts of sentences with syntactic correlated keywords like Noun Phrase (NP) and Verb Phrase (VP)."
+            },
+            {
+                term: "BERT",
+                definition: "Bi-directional Encoder Representations from Transformers is a pre-trained model that examines text in both directions simultaneously for better language understanding. It can be fine-tuned for various NLP tasks such as question answering, sentiment analysis, and text classification."
+            },
+            {
+                term: "Morphology",
+                definition: "The branch of linguistics focused on the structure and formation of words. It explores the smallest units of meaning in language (morphemes), which include roots, prefixes, and suffixes."
+            },
+            {
+                term: "Data Corpora",
+                definition: "Collections of structured linguistic data that serve as essential resources in NLP and computational linguistics. These corpora, often comprising written texts or transcribed speech, are used to train, test, and benchmark NLP models."
+            },
+            {
+                term: "Discourse Analysis",
+                definition: "The examination of how individual sentences relate to each other within a larger text, aiming to identify patterns of cohesion and coherence that help form a unified message."
+            },
+            {
+                term: "Fine-tuning",
+                definition: "A process where a pre-trained machine learning model is further trained on a specific task or domain with a smaller dataset. This adapts the general capabilities of the model to specialized applications."
+            },
+            {
+                term: "Hidden Markov Model",
+                definition: "A stochastic model in which a system is represented by a Markov chain with unobserved (hidden) states. An HMM can be considered the simplest special case of a dynamic Bayesian network."
+            },
+            {
+                term: "Information extraction",
+                definition: "The process of identifying phrases of interest in textual data, helping to summarize information relevant to user needs such as names, places, events, dates, times, and prices."
+            },
+            {
+                term: "Machine Translation",
+                definition: "The process of translating phrases from one language to another using statistical analyses of language data sets, artificial neural networks, and Deep learning."
+            },
+            {
+                term: "Neural Networks",
+                definition: "A class of machine learning algorithms inspired by the structure of the human brain, consisting of multiple interconnected 'neurons' organized in layers to recognize complex patterns in data."
+            },
+            {
+                term: "Transformers",
+                definition: "Large multi-layer neural networks considered a Deep learning architecture. Introduced in 2017, it is used in well-known large language models such as OpenAI's GPT products or Meta's LLaMA."
+            },
+            {
+                term: "Word Embedding",
+                definition: "A method of representing words and documents in numerical form, allowing approximation of word meanings in a lower-dimensional space. These can be trained more quickly than traditional models like WordNet."
+            },
+            {
+                term: "XAI",
+                definition: "Abbreviation for Explainable Artificial Intelligence, focusing on analyzing, modeling, and communicating the processes underlying AI algorithms to better comprehend deep learning Transformer models."
+            }
         ];
 
-        // Function to update the display
         function updateGlossaryDisplay(searchTerm = '') {
             const glossaryList = document.getElementById('glossaryList');
             const filteredGlossary = glossaryData.filter(item => 
@@ -156,13 +228,13 @@
             });
         }
 
-        // Initialize the display immediately
-        updateGlossaryDisplay();
-
         // Add search functionality
         document.getElementById('searchInput').addEventListener('input', (e) => {
             updateGlossaryDisplay(e.target.value);
         });
+
+        // Initialize the display immediately
+        updateGlossaryDisplay();
     </script>
 </body>
 </html>
