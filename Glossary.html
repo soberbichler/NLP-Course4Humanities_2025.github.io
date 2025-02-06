@@ -6,11 +6,10 @@
     <title>NLP Glossary</title>
     <style>
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             margin: 0;
             padding: 40px;
             background-color: #ffffff;
-            color: #1a2b3c;
             line-height: 1.6;
         }
         .container {
@@ -21,40 +20,6 @@
             color: #1a2b3c;
             font-size: 36px;
             margin-bottom: 30px;
-            font-weight: 600;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 12px 16px;
-            margin-bottom: 30px;
-            border: 1px solid #e1e4e8;
-            border-radius: 8px;
-            font-size: 16px;
-            box-sizing: border-box;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-        input[type="text"]:focus {
-            outline: none;
-            border-color: #0066cc;
-            box-shadow: 0 2px 4px rgba(0,102,204,0.1);
-        }
-        .glossary-item {
-            border-bottom: 1px solid #e1e4e8;
-            padding: 20px 0;
-        }
-        .glossary-item:last-child {
-            border-bottom: none;
-        }
-        .term {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #1a2b3c;
-            font-size: 1.1em;
-        }
-        .definition {
-            color: #4a5568;
-            line-height: 1.6;
         }
         .letter-section {
             margin-bottom: 40px;
@@ -69,172 +34,177 @@
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 2px solid #e1e4e8;
-            font-weight: 600;
         }
-        .search-section {
-            margin-bottom: 40px;
+        .glossary-item {
+            border-bottom: 1px solid #e1e4e8;
+            padding: 20px 0;
         }
-        .no-results {
-            text-align: center;
-            color: #666;
-            padding: 40px;
-            background: #f8f9fa;
-            border-radius: 8px;
+        .term {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1a2b3c;
+            font-size: 1.1em;
+        }
+        .definition {
+            color: #4a5568;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>NLP Glossary</h1>
-        
-        <div class="search-section">
-            <input type="text" id="searchInput" placeholder="Type to search...">
+
+        <div class="letter-section">
+            <div class="letter-header">A</div>
+            <div class="glossary-item">
+                <div class="term">ALPAC Report</div>
+                <div class="definition">A 34-page report accompanied by twenty appendices released by the Automatic Language Processing Advisory Committee (ALPAC) in November 1966 under the title "Languages and machines: computers in translation and linguistics" to evaluate the demands of U.S. government officials and researchers regarding the translation of Russian-language documents into English.</div>
+            </div>
         </div>
-        
-        <div id="glossaryList"></div>
+
+        <div class="letter-section">
+            <div class="letter-header">B</div>
+            <div class="glossary-item">
+                <div class="term">BERT</div>
+                <div class="definition">Bi-directional Encoder Representations from Transformers is a pre-trained model that examines text in both directions simultaneously for better language understanding. It can be fine-tuned for various NLP tasks such as question answering, sentiment analysis, and text classification.</div>
+            </div>
+        </div>
+
+        <div class="letter-section">
+            <div class="letter-header">C</div>
+            <div class="glossary-item">
+                <div class="term">Chunking</div>
+                <div class="definition">A process of separating phrases from unstructured text. Since simple tokens may not represent the actual meaning of the text, it labels parts of sentences with syntactic correlated keywords like Noun Phrase (NP) and Verb Phrase (VP).</div>
+            </div>
+        </div>
+
+        <div class="letter-section">
+            <div class="letter-header">D</div>
+            <div class="glossary-item">
+                <div class="term">Data Corpora</div>
+                <div class="definition">Collections of structured linguistic data that serve as essential resources in NLP and computational linguistics. These corpora, often comprising written texts or transcribed speech, are used to train, test, and benchmark NLP models.</div>
+            </div>
+            <div class="glossary-item">
+                <div class="term">Discourse Analysis</div>
+                <div class="definition">The examination of how individual sentences relate to each other within a larger text, aiming to identify patterns of cohesion and coherence that help form a unified message.</div>
+            </div>
+        </div>
+
+        <div class="letter-section">
+            <div class="letter-header">F</div>
+            <div class="glossary-item">
+                <div class="term">Fine-tuning</div>
+                <div class="definition">A process where a pre-trained machine learning model is further trained on a specific task or domain with a smaller dataset. This adapts the general capabilities of the model to specialized applications.</div>
+            </div>
+        </div>
+
+        <div class="letter-section">
+            <div class="letter-header">G</div>
+            <div class="glossary-item">
+                <div class="term">GLUE Score</div>
+                <div class="definition">General Language Understanding Evaluation (GLUE) is a benchmarking suite for evaluating NLP models on their general language understanding capabilities across various tasks. GLUE includes nine diverse NLP tasks that test a model's ability to perform on tasks such as sentiment analysis and textual entailment.</div>
+            </div>
+        </div>
+
+        <div class="letter-section">
+            <div class="letter-header">H</div>
+            <div class="glossary-item">
+                <div class="term">Hidden Markov Model</div>
+                <div class="definition">A stochastic model in which a system is represented by a Markov chain with unobserved (hidden) states. An HMM can be considered the simplest special case of a dynamic Bayesian network.</div>
+            </div>
+        </div>
+
+        <div class="letter-section">
+            <div class="letter-header">I</div>
+            <div class="glossary-item">
+                <div class="term">Information extraction</div>
+                <div class="definition">The process of identifying phrases of interest in textual data, helping to summarize information relevant to user needs such as names, places, events, dates, times, and prices.</div>
+            </div>
+        </div>
+
+        <div class="letter-section">
+            <div class="letter-header">L</div>
+            <div class="glossary-item">
+                <div class="term">Long Short-Term Memory (LSTM)</div>
+                <div class="definition">A type of Recurrent Neural Network (RNN) designed to better retain essential information over longer sequences, making it suitable for applications where long-term dependencies are key, such as text and speech processing.</div>
+            </div>
+        </div>
+
+        <div class="letter-section">
+            <div class="letter-header">M</div>
+            <div class="glossary-item">
+                <div class="term">Machine Translation</div>
+                <div class="definition">The process of translating phrases from one language to another using statistical analyses of language data sets, artificial neural networks, and Deep learning.</div>
+            </div>
+            <div class="glossary-item">
+                <div class="term">Morphology</div>
+                <div class="definition">The branch of linguistics focused on the structure and formation of words. It explores the smallest units of meaning in language (morphemes), which include roots, prefixes, and suffixes.</div>
+            </div>
+        </div>
+
+        <div class="letter-section">
+            <div class="letter-header">N</div>
+            <div class="glossary-item">
+                <div class="term">Naive Bayes Classifiers</div>
+                <div class="definition">Probabilistic algorithms that apply Bayes' Theorem to classify data by predicting the probability of a label given certain features. In NLP, these classifiers are commonly used in text classification tasks such as spam detection and sentiment analysis.</div>
+            </div>
+            <div class="glossary-item">
+                <div class="term">Natural Language Processing (NLP)</div>
+                <div class="definition">A branch of Artificial Intelligence and Linguistics that enables computers to process, understand, and interact with human language. It consists of two main components: Natural Language Understanding (NLU) for comprehending input, and Natural Language Generation (NLG) for producing output.</div>
+            </div>
+            <div class="glossary-item">
+                <div class="term">Neural Networks</div>
+                <div class="definition">A class of machine learning algorithms inspired by the structure of the human brain, consisting of multiple interconnected 'neurons' organized in layers to recognize complex patterns in data.</div>
+            </div>
+        </div>
+
+        <div class="letter-section">
+            <div class="letter-header">P</div>
+            <div class="glossary-item">
+                <div class="term">Part-of-speech (POS) tagging</div>
+                <div class="definition">A vital component of NLP, in which each word in a text receives a syntactic tag according to lexical categories such as nouns, verbs, and adjectives, based on the context of a sentence.</div>
+            </div>
+        </div>
+
+        <div class="letter-section">
+            <div class="letter-header">S</div>
+            <div class="glossary-item">
+                <div class="term">Semantic Role Labeling (SRL)</div>
+                <div class="definition">A task of NLP centered on assigning semantic roles to words and phrases as arguments related to the predicate, or main verb phrase of a sentence composed of a verb as well as associated objects and modifiers.</div>
+            </div>
+            <div class="glossary-item">
+                <div class="term">Sentiment analysis</div>
+                <div class="definition">A process of extracting sentiments from text. This analysis method can vary from simple sentiment classification (negative, neutral, or positive) to more descriptive techniques.</div>
+            </div>
+            <div class="glossary-item">
+                <div class="term">Sequence-to-Sequence Mapping</div>
+                <div class="definition">A framework where encoder and decoder networks are used to map from sequence to vector and vector to sequence respectively. Many NLP problems are sequential as the end of the computed text or speech is not known.</div>
+            </div>
+        </div>
+
+        <div class="letter-section">
+            <div class="letter-header">T</div>
+            <div class="glossary-item">
+                <div class="term">Transformers</div>
+                <div class="definition">Large multi-layer neural networks considered a Deep learning architecture. Introduced in 2017, it is used in well-known large language models such as OpenAI's GPT products or Meta's LLaMA.</div>
+            </div>
+        </div>
+
+        <div class="letter-section">
+            <div class="letter-header">W</div>
+            <div class="glossary-item">
+                <div class="term">Word Embedding</div>
+                <div class="definition">A method of representing words and documents in numerical form, allowing approximation of word meanings in a lower-dimensional space. These can be trained more quickly than traditional models like WordNet.</div>
+            </div>
+        </div>
+
+        <div class="letter-section">
+            <div class="letter-header">X</div>
+            <div class="glossary-item">
+                <div class="term">XAI</div>
+                <div class="definition">Abbreviation for Explainable Artificial Intelligence, focusing on analyzing, modeling, and communicating the processes underlying AI algorithms to better comprehend deep learning Transformer models.</div>
+            </div>
+        </div>
     </div>
-
-    <script>
-        const glossaryData = [
-            {
-                term: "Natural Language Processing (NLP)",
-                definition: "A branch of Artificial Intelligence and Linguistics that enables computers to process, understand, and interact with human language. It consists of two main components: Natural Language Understanding (NLU), which focuses on comprehending human language input, and Natural Language Generation (NLG), which deals with producing human-readable text output."
-            },
-            {
-                term: "ALPAC Report",
-                definition: "A 34-page report accompanied by twenty appendices released by the Automatic Language Processing Advisory Committee (ALPAC) in November 1966 under the title "Languages and machines: computers in translation and linguistics" to evaluate the demands of U.S. government officials and researchers regarding the translation of Russian-language documents into English."
-            },
-            {
-                term: "Part-of-speech (POS) tagging",
-                definition: "A vital component and implementation of NLP, in which each word in a text receives a syntactic tag according to lexical categories such as nouns, verbs, and adjectives, among others, based on the context of a sentence. This procedure is also known as grammatical tagging."
-            },
-            {
-                term: "Semantic Role Labeling (SRL)",
-                definition: "A task of NLP centered on assigning semantic roles to words and phrases as arguments related to the predicate, or main verb phrase of a sentence composed of a verb as well as associated objects and modifiers."
-            },
-            {
-                term: "Sentiment analysis",
-                definition: "A process of extracting sentiments from a text that is essential to NLP. Also known as opinion mining, this analysis method can vary in complexity from sentiment classification using the categories negative, neutral, or positive to more descriptive techniques."
-            },
-            {
-                term: "Long Short-Term Memory (LSTM)",
-                definition: "A type of Recurrent Neural Network (RNN) designed to better retain essential information over longer sequences, making it suitable for applications where long-term dependencies are key, such as text and speech processing."
-            },
-            {
-                term: "GLUE Score",
-                definition: "General Language Understanding Evaluation (GLUE) is a benchmarking suite for evaluating NLP models on their general language understanding capabilities across various tasks. GLUE includes nine diverse NLP tasks that test a model's ability to perform on tasks such as sentiment analysis and textual entailment."
-            },
-            {
-                term: "Naive Bayes Classifiers",
-                definition: "Probabilistic algorithms that apply Bayes' Theorem to classify data by predicting the probability of a label given certain features. In NLP, these classifiers are commonly used in text classification tasks such as spam detection and sentiment analysis."
-            },
-            {
-                term: "Sequence-to-Sequence Mapping",
-                definition: "A framework where encoder and decoder networks are used to map from sequence to vector and vector to sequence respectively. Many NLP problems are sequential as the end of the computed text or speech is not known."
-            },
-            {
-                term: "Chunking",
-                definition: "A process of separating phrases from unstructured text. Since simple tokens may not represent the actual meaning of the text, it labels parts of sentences with syntactic correlated keywords like Noun Phrase (NP) and Verb Phrase (VP)."
-            },
-            {
-                term: "BERT",
-                definition: "Bi-directional Encoder Representations from Transformers is a pre-trained model that examines text in both directions simultaneously for better language understanding. It can be fine-tuned for various NLP tasks such as question answering, sentiment analysis, and text classification."
-            },
-            {
-                term: "Morphology",
-                definition: "The branch of linguistics focused on the structure and formation of words. It explores the smallest units of meaning in language (morphemes), which include roots, prefixes, and suffixes."
-            },
-            {
-                term: "Data Corpora",
-                definition: "Collections of structured linguistic data that serve as essential resources in NLP and computational linguistics. These corpora, often comprising written texts or transcribed speech, are used to train, test, and benchmark NLP models."
-            },
-            {
-                term: "Discourse Analysis",
-                definition: "The examination of how individual sentences relate to each other within a larger text, aiming to identify patterns of cohesion and coherence that help form a unified message."
-            },
-            {
-                term: "Fine-tuning",
-                definition: "A process where a pre-trained machine learning model is further trained on a specific task or domain with a smaller dataset. This adapts the general capabilities of the model to specialized applications."
-            },
-            {
-                term: "Hidden Markov Model",
-                definition: "A stochastic model in which a system is represented by a Markov chain with unobserved (hidden) states. An HMM can be considered the simplest special case of a dynamic Bayesian network."
-            },
-            {
-                term: "Information extraction",
-                definition: "The process of identifying phrases of interest in textual data, helping to summarize information relevant to user needs such as names, places, events, dates, times, and prices."
-            },
-            {
-                term: "Machine Translation",
-                definition: "The process of translating phrases from one language to another using statistical analyses of language data sets, artificial neural networks, and Deep learning."
-            },
-            {
-                term: "Neural Networks",
-                definition: "A class of machine learning algorithms inspired by the structure of the human brain, consisting of multiple interconnected 'neurons' organized in layers to recognize complex patterns in data."
-            },
-            {
-                term: "Transformers",
-                definition: "Large multi-layer neural networks considered a Deep learning architecture. Introduced in 2017, it is used in well-known large language models such as OpenAI's GPT products or Meta's LLaMA."
-            },
-            {
-                term: "Word Embedding",
-                definition: "A method of representing words and documents in numerical form, allowing approximation of word meanings in a lower-dimensional space. These can be trained more quickly than traditional models like WordNet."
-            },
-            {
-                term: "XAI",
-                definition: "Abbreviation for Explainable Artificial Intelligence, focusing on analyzing, modeling, and communicating the processes underlying AI algorithms to better comprehend deep learning Transformer models."
-            }
-        ];
-
-        function updateGlossaryDisplay(searchTerm = '') {
-            const glossaryList = document.getElementById('glossaryList');
-            const filteredGlossary = glossaryData.filter(item => 
-                item.term.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                item.definition.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-
-            glossaryList.innerHTML = '';
-            
-            if (filteredGlossary.length === 0) {
-                glossaryList.innerHTML = '<div class="no-results">No terms found</div>';
-                return;
-            }
-
-            const sections = {};
-            filteredGlossary.forEach(item => {
-                const firstLetter = item.term[0].toUpperCase();
-                if (!sections[firstLetter]) {
-                    sections[firstLetter] = [];
-                }
-                sections[firstLetter].push(item);
-            });
-
-            Object.keys(sections).sort().forEach(letter => {
-                const sectionElement = document.createElement('div');
-                sectionElement.className = 'letter-section';
-                sectionElement.innerHTML = `<div class="letter-header">${letter}</div>`;
-                
-                sections[letter].forEach(item => {
-                    const itemElement = document.createElement('div');
-                    itemElement.className = 'glossary-item';
-                    itemElement.innerHTML = `
-                        <div class="term">${item.term}</div>
-                        <div class="definition">${item.definition}</div>
-                    `;
-                    sectionElement.appendChild(itemElement);
-                });
-                
-                glossaryList.appendChild(sectionElement);
-            });
-        }
-
-        // Add search functionality
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            updateGlossaryDisplay(e.target.value);
-        });
-
-        // Initialize the display immediately
-        updateGlossaryDisplay();
-    </script>
 </body>
 </html>
