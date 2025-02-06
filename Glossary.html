@@ -6,79 +6,80 @@
     <title>NLP Glossary</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             margin: 0;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
+            padding: 40px;
+            background-color: #ffffff;
+            color: #1a2b3c;
             line-height: 1.6;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            gap: 20px;
-        }
-        .section {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        .glossary-section {
-            flex: 2;
-            min-width: 500px;
-        }
-        .search-section {
-            margin-bottom: 20px;
         }
         h1 {
-            color: #2c3e50;
-            font-size: 32px;
+            color: #1a2b3c;
+            font-size: 36px;
             margin-bottom: 30px;
-        }
-        h2 {
-            color: #34495e;
-            font-size: 24px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+            font-weight: 600;
         }
         input[type="text"] {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 12px 16px;
+            margin-bottom: 30px;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
             font-size: 16px;
             box-sizing: border-box;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #0066cc;
+            box-shadow: 0 2px 4px rgba(0,102,204,0.1);
         }
         .glossary-item {
-            border-bottom: 1px solid #eee;
-            padding: 15px 0;
+            border-bottom: 1px solid #e1e4e8;
+            padding: 20px 0;
         }
         .glossary-item:last-child {
             border-bottom: none;
         }
         .term {
-            font-weight: bold;
-            margin-right: 10px;
-            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1a2b3c;
             font-size: 1.1em;
         }
         .definition {
-            margin-top: 5px;
-            line-height: 1.5;
+            color: #4a5568;
+            line-height: 1.6;
         }
         .letter-section {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         .letter-header {
             font-size: 24px;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 5px;
-            border-bottom: 2px solid #3498db;
+            color: #1a2b3c;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e1e4e8;
+            font-weight: 600;
+        }
+        .search-section {
+            margin-bottom: 40px;
+        }
+        .no-results {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+            background: #f8f9fa;
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -86,13 +87,11 @@
     <div class="container">
         <h1>NLP Glossary</h1>
         
-        <div class="section search-section">
+        <div class="search-section">
             <input type="text" id="searchInput" placeholder="Type to search...">
         </div>
         
-        <div class="section glossary-section">
-            <div id="glossaryList"></div>
-        </div>
+        <div id="glossaryList"></div>
     </div>
 
     <script>
@@ -114,59 +113,55 @@
             {"term": "XAI", "definition": "Abbreviation for Explainable Artificial Intelligence, which outlines a focus on analyzing, modeling, and communicating the processes underlying AI algorithms in order to better comprehend deep learning Transformer models."}
         ];
 
-        document.addEventListener('DOMContentLoaded', function() {
+        // Function to update the display
+        function updateGlossaryDisplay(searchTerm = '') {
             const glossaryList = document.getElementById('glossaryList');
-            const searchInput = document.getElementById('searchInput');
+            const filteredGlossary = glossaryData.filter(item => 
+                item.term.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                item.definition.toLowerCase().includes(searchTerm.toLowerCase())
+            );
 
-            function updateGlossaryDisplay() {
-                const searchTerm = searchInput.value.toLowerCase();
-                const filteredGlossary = glossaryData
-                    .filter(item => 
-                        item.term.toLowerCase().includes(searchTerm) || 
-                        item.definition.toLowerCase().includes(searchTerm)
-                    );
-
-                glossaryList.innerHTML = '';
-                const sections = {};
-                
-                filteredGlossary.forEach(item => {
-                    const firstLetter = item.term[0].toUpperCase();
-                    if (!sections[firstLetter]) {
-                        sections[firstLetter] = [];
-                    }
-                    sections[firstLetter].push(item);
-                });
-                
-                Object.keys(sections).sort().forEach(letter => {
-                    const sectionElement = document.createElement('div');
-                    sectionElement.className = 'letter-section';
-                    sectionElement.innerHTML = `<div class="letter-header">${letter}</div>`;
-                    
-                    sections[letter].forEach(item => {
-                        const itemElement = document.createElement('div');
-                        itemElement.className = 'glossary-item';
-                        itemElement.innerHTML = `
-                            <div>
-                                <div class="term">${item.term}</div>
-                                <div class="definition">${item.definition}</div>
-                            </div>
-                        `;
-                        sectionElement.appendChild(itemElement);
-                    });
-                    
-                    glossaryList.appendChild(sectionElement);
-                });
-
-                if (filteredGlossary.length === 0) {
-                    glossaryList.innerHTML = '<p style="text-align: center; color: #666;">No terms found.</p>';
-                }
+            glossaryList.innerHTML = '';
+            
+            if (filteredGlossary.length === 0) {
+                glossaryList.innerHTML = '<div class="no-results">No terms found</div>';
+                return;
             }
 
-            // Add search functionality
-            searchInput.addEventListener('input', updateGlossaryDisplay);
+            const sections = {};
+            filteredGlossary.forEach(item => {
+                const firstLetter = item.term[0].toUpperCase();
+                if (!sections[firstLetter]) {
+                    sections[firstLetter] = [];
+                }
+                sections[firstLetter].push(item);
+            });
 
-            // Initial display
-            updateGlossaryDisplay();
+            Object.keys(sections).sort().forEach(letter => {
+                const sectionElement = document.createElement('div');
+                sectionElement.className = 'letter-section';
+                sectionElement.innerHTML = `<div class="letter-header">${letter}</div>`;
+                
+                sections[letter].forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'glossary-item';
+                    itemElement.innerHTML = `
+                        <div class="term">${item.term}</div>
+                        <div class="definition">${item.definition}</div>
+                    `;
+                    sectionElement.appendChild(itemElement);
+                });
+                
+                glossaryList.appendChild(sectionElement);
+            });
+        }
+
+        // Initialize the display immediately
+        updateGlossaryDisplay();
+
+        // Add search functionality
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            updateGlossaryDisplay(e.target.value);
         });
     </script>
 </body>
