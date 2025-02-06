@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Glossary</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script> 
+    <title>NLP Glossary</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,11 +14,9 @@
             line-height: 1.6;
         }
         .container {
-            display: flex;
             max-width: 1200px;
             margin: 0 auto;
             gap: 20px;
-            flex-wrap: wrap;
         }
         .section {
             background-color: #ffffff;
@@ -28,17 +25,12 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             margin-bottom: 20px;
         }
-        .add-section {
-            flex: 1;
-            min-width: 300px;
-        }
         .glossary-section {
             flex: 2;
             min-width: 500px;
         }
         .search-section {
-            flex: 1;
-            min-width: 300px;
+            margin-bottom: 20px;
         }
         h1 {
             color: #2c3e50;
@@ -52,8 +44,7 @@
             border-bottom: 2px solid #eee;
             padding-bottom: 10px;
         }
-        input[type="text"],
-        textarea {
+        input[type="text"] {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -62,38 +53,9 @@
             font-size: 16px;
             box-sizing: border-box;
         }
-        textarea {
-            height: 100px;
-            resize: vertical;
-            font-family: Arial, sans-serif;
-        }
-        button, input[type="submit"] {
-            background-color: #3498db;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-        button:hover, input[type="submit"]:hover {
-            background-color: #2980b9;
-        }
-        .delete-button {
-            background-color: #e74c3c;
-            padding: 5px 10px;
-            font-size: 14px;
-        }
-        .delete-button:hover {
-            background-color: #c0392b;
-        }
         .glossary-item {
             border-bottom: 1px solid #eee;
             padding: 15px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
         }
         .glossary-item:last-child {
             border-bottom: none;
@@ -102,10 +64,10 @@
             font-weight: bold;
             margin-right: 10px;
             color: #2c3e50;
+            font-size: 1.1em;
         }
         .definition {
-            flex: 1;
-            margin-right: 20px;
+            margin-top: 5px;
             line-height: 1.5;
         }
         .letter-section {
@@ -118,119 +80,51 @@
             padding-bottom: 5px;
             border-bottom: 2px solid #3498db;
         }
-        #notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            border-radius: 4px;
-            display: none;
-            color: white;
-            z-index: 1000;
-        }
-        .success {
-            background-color: #2ecc71;
-        }
-        .error {
-            background-color: #e74c3c;
-        }
     </style>
 </head>
 <body>
-    <div id="notification"></div>
-    <h1>Glossary</h1>
     <div class="container">
-        <div class="section add-section">
-            <h2>Add New Term</h2>
-            <form id="glossaryForm">
-                <input type="text" id="term" placeholder="Term" required>
-                <textarea id="definition" placeholder="Definition" required></textarea>
-                <button type="submit">Add Term</button>
-            </form>
+        <h1>NLP Glossary</h1>
+        
+        <div class="section search-section">
+            <input type="text" id="searchInput" placeholder="Type to search...">
         </div>
         
         <div class="section glossary-section">
-            <h2>Glossary List</h2>
             <div id="glossaryList"></div>
-        </div>
-        
-        <div class="section search-section">
-            <h2>Search</h2>
-            <input type="text" id="searchInput" placeholder="Type to search...">
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Supabase
-            const { createClient } = supabase;
-            const supabaseClient = createClient(
-                'https://itpqpqtvtpdyraookiqf.supabase.co',
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml0cHFwcXR2dHBkeXJhb29raXFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk4NTc5MjYsImV4cCI6MjA0NTQzMzkyNn0.WVVtHy1spmEjl3_A2i8jEETyzgxmyAFM7yGhJ3oSp5w'
-            );
+        const glossaryData = [
+            {"term": "ALPAC Report", "definition": "A 34-page report accompanied by twenty appendices released by the Automatic Language Processing Advisory Committee (ALPAC) in November 1966 under the title "Languages and machines: computers in translation and linguistics" to evaluate the demands of U.S. government officials and researchers regarding the translation of Russian-language documents into English."},
+            {"term": "BERT", "definition": "Bi-directional Encoder Representations from Transformers (BERT) is a pre-trained model with unlabeled text available on BookCorpus and English Wikipedia. This can be fine-tuned to capture context for various NLP tasks such as question answering, sentiment analysis, text classification, sentence embedding, interpreting ambiguity in the text etc."},
+            {"term": "BLEU", "definition": "The BLEU (BiLingual Evaluation Understudy) score is a metric for evaluating an NLP model's performance. Each word in the output sentence is scored based on its presence in one of the reference sentences."},
+            {"term": "Chunking", "definition": "Chunking is a process of separating phrases from unstructured text. Since simple tokens may not represent the actual meaning of the text, it is advisable to use phrases such as "North Africa" as a single word instead of 'North' and 'Africa' separate words."},
+            {"term": "Data Corpora", "definition": "Collections of structured linguistic data that serve as essential resources in NLP and computational linguistics. These corpora, often comprising written texts or transcribed speech, are used to train, test, and benchmark NLP models."},
+            {"term": "Fine-tuning", "definition": "A process where a pre-trained machine learning model is further trained on a specific task or domain with a smaller dataset. This adapts the general capabilities of the model to specialized applications while leveraging prior knowledge from the initial training phase."},
+            {"term": "LSTM", "definition": "Long Short-Term Memory (LSTM) is a type of Recurrent Neural Network (RNN) designed to better retain essential information over longer sequences, making it suitable for applications where long-term dependencies are key, such as text and speech processing."},
+            {"term": "Machine Translation", "definition": "The process of translating phrases from one language to another. The general underlying principles include statistical analyses of language data sets, artificial neural networks and Deep learning."},
+            {"term": "Natural Language Processing (NLP)", "definition": "A branch of Artificial Intelligence and Linguistics that enables computers to process, understand, and interact with human language. It consists of Natural Language Understanding (NLU) for comprehending input, and Natural Language Generation (NLG) for producing output."},
+            {"term": "Neural Networks", "definition": "A class of machine learning algorithms inspired by the structure of the human brain. They consist of multiple interconnected 'neurons' organized in layers, enabling them to recognize complex patterns in data."},
+            {"term": "Part-of-speech (POS) tagging", "definition": "A vital component of NLP, in which each word in a text receives a syntactic tag according to lexical categories such as nouns, verbs, and adjectives, based on the context of a sentence."},
+            {"term": "Sentiment analysis", "definition": "A process of extracting sentiments from text. This analysis method can vary from simple sentiment classification (negative, neutral, or positive) to more descriptive techniques such as targeted sentiment, which investigates opinions regarding specific entities."},
+            {"term": "Transformers", "definition": "Large multi-layer neural networks considered a Deep learning architecture. Introduced in 2017, it is used in well-known large language models such as OpenAI's GPT products or Meta's LLaMA."},
+            {"term": "Word Embedding", "definition": "A method of representing words and documents in numerical form. Through them it is possible to approximate a word's meaning in a lower-dimensional space with the help of these embeddings."},
+            {"term": "XAI", "definition": "Abbreviation for Explainable Artificial Intelligence, which outlines a focus on analyzing, modeling, and communicating the processes underlying AI algorithms in order to better comprehend deep learning Transformer models."}
+        ];
 
-            const glossaryForm = document.getElementById('glossaryForm');
+        document.addEventListener('DOMContentLoaded', function() {
             const glossaryList = document.getElementById('glossaryList');
             const searchInput = document.getElementById('searchInput');
-            const notification = document.getElementById('notification');
-            let glossary = [];
-
-            function showNotification(message, type) {
-                notification.textContent = message;
-                notification.className = type;
-                notification.style.display = 'block';
-                setTimeout(() => {
-                    notification.style.display = 'none';
-                }, 3000);
-            }
-
-            async function loadGlossary() {
-                try {
-                    const { data, error } = await supabaseClient
-                        .from('glossary_entries')
-                        .select('*')
-                        .order('term');
-                    
-                    if (error) throw error;
-                    glossary = data || [];
-                    updateGlossaryDisplay();
-                } catch (error) {
-                    console.error('Error loading glossary:', error);
-                    showNotification('Error loading glossary', 'error');
-                }
-            }
-
-            glossaryForm.addEventListener('submit', async function(event) {
-                event.preventDefault();
-                const term = document.getElementById('term').value.trim();
-                const definition = document.getElementById('definition').value.trim();
-                
-                try {
-                    const { error } = await supabaseClient
-                        .from('glossary_entries')
-                        .insert([{ term, definition }]);
-
-                    if (error) throw error;
-                    
-                    glossaryForm.reset();
-                    showNotification('Term added successfully', 'success');
-                    await loadGlossary();
-                } catch (error) {
-                    console.error('Error adding term:', error);
-                    showNotification('Error adding term', 'error');
-                }
-            });
-
-            searchInput.addEventListener('input', updateGlossaryDisplay);
 
             function updateGlossaryDisplay() {
                 const searchTerm = searchInput.value.toLowerCase();
-                const filteredGlossary = glossary
+                const filteredGlossary = glossaryData
                     .filter(item => 
                         item.term.toLowerCase().includes(searchTerm) || 
                         item.definition.toLowerCase().includes(searchTerm)
-                    )
-                    .sort((a, b) => a.term.localeCompare(b.term));
+                    );
 
                 glossaryList.innerHTML = '';
                 const sections = {};
@@ -252,11 +146,10 @@
                         const itemElement = document.createElement('div');
                         itemElement.className = 'glossary-item';
                         itemElement.innerHTML = `
-                            <div class="definition">
-                                <span class="term">${item.term}:</span> 
-                                ${item.definition}
+                            <div>
+                                <div class="term">${item.term}</div>
+                                <div class="definition">${item.definition}</div>
                             </div>
-                            <button class="delete-button" onclick="deleteEntry(${item.id})">Delete</button>
                         `;
                         sectionElement.appendChild(itemElement);
                     });
@@ -269,27 +162,11 @@
                 }
             }
 
-            // Make deleteEntry function global so the onclick handler can find it
-            window.deleteEntry = async function(id) {
-                if (confirm("Are you sure you want to delete this entry?")) {
-                    try {
-                        const { error } = await supabaseClient
-                            .from('glossary_entries')
-                            .delete()
-                            .eq('id', id);
-                        
-                        if (error) throw error;
-                        showNotification('Term deleted successfully', 'success');
-                        await loadGlossary();
-                    } catch (error) {
-                        console.error('Error deleting term:', error);
-                        showNotification('Error deleting term', 'error');
-                    }
-                }
-            }
+            // Add search functionality
+            searchInput.addEventListener('input', updateGlossaryDisplay);
 
-            // Initial load
-            loadGlossary();
+            // Initial display
+            updateGlossaryDisplay();
         });
     </script>
 </body>
