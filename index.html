@@ -4,39 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NLP-Kurs DMGK - Digital Humanities</title>
-    <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .card-img-top {
-            height: 200px;
-            object-fit: cover;
-            object-position: center;
-            width: 100%;
-        }
-        .card-title {
-            font-size: 1rem;
-            font-weight: bold;
-        }
-        .card-date {
-            font-size: 0.9rem;
-            color: #6c757d;
-        }
-        .module-content {
-            display: none;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <div class="logo">
             <svg viewBox="0 0 200 200" width="100" height="100">
                 <circle cx="100" cy="100" r="80" fill="#ffffff"/>
-                <text x="100" y="70" font-family="Arial, sans-serif" font-size="40" fill="#8B0000" text-anchor="middle">NLP</text>
-                <g fill="none" stroke="#8B0000" stroke-width="4">
+                <text x="100" y="70" font-family="Georgia, serif" font-size="40" fill="#d97706" text-anchor="middle">NLP</text>
+                <g fill="none" stroke="#d97706" stroke-width="4">
                     <path d="M40,120 Q100,160 160,120"/>
-                    <circle cx="40" cy="120" r="5" fill="#8B0000"/>
-                    <circle cx="100" cy="140" r="5" fill="#8B0000"/>
-                    <circle cx="160" cy="120" r="5" fill="#8B0000"/>
+                    <circle cx="40" cy="120" r="5" fill="#d97706"/>
+                    <circle cx="100" cy="140" r="5" fill="#d97706"/>
+                    <circle cx="160" cy="120" r="5" fill="#d97706"/>
                 </g>
             </svg>
         </div>
@@ -44,19 +26,11 @@
         <p>Master Program DMGK Mainz 2025/26</p>
         <p>Syllabus</p>
         <nav style="margin-top: 1.5rem;">
-            <ul style="display: flex; justify-content: center; gap: 20px; padding: 0; list-style-type: none;">
-                <li>
-                    <a href="#about" style="color: #FFFFFF; text-decoration: none; font-weight: 400; text-transform: uppercase; font-size: 0.8em; letter-spacing: 1px; padding: 8px 16px; border: 1px solid rgba(255,215,0,0.3); border-radius: 2px; transition: all 0.3s ease;">About the Course</a>
-                </li>
-                <li>
-                    <a href="#schedule" style="color: #FFFFFF; text-decoration: none; font-weight: 400; text-transform: uppercase; font-size: 0.8em; letter-spacing: 1px; padding: 8px 16px; border: 1px solid rgba(255,215,0,0.3); border-radius: 2px; transition: all 0.3s ease;">Course Overview</a>
-                </li>
-                <li>
-                    <a href="#modules" style="color: #FFFFFF; text-decoration: none; font-weight: 400; text-transform: uppercase; font-size: 0.8em; letter-spacing: 1px; padding: 8px 16px; border: 1px solid rgba(255,215,0,0.3); border-radius: 2px; transition: all 0.3s ease;">Modules and Workflows</a>
-                </li>
-                <li>
-                    <a href="#literature" style="color: #FFFFFF; text-decoration: none; font-weight: 400; text-transform: uppercase; font-size: 0.8em; letter-spacing: 1px; padding: 8px 16px; border: 1px solid rgba(255,215,0,0.3); border-radius: 2px; transition: all 0.3s ease;">Literature</a>
-                </li>
+            <ul>
+                <li><a href="#about">About the Course</a></li>
+                <li><a href="#schedule">Course Overview</a></li>
+                <li><a href="#modules">Modules and Workflows</a></li>
+                <li><a href="#literature">Literature</a></li>
             </ul>
         </nav>
     </header>
@@ -72,7 +46,6 @@
                 <li><a href="Anleitungen.html">Instructions for GitHub and HuggingFace</a></li>
                 <li><a href="https://www.marqo.ai/blog/getting-started-with-google-colab-a-beginners-guide">Google Colab Documentation</a></li>
                 <li><a href="https://www.deutsche-digitale-bibliothek.de/newspaper">German Newspaper Portal</a></li>
-                
             </ul>
         </aside>
         <main>
@@ -140,7 +113,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title">Module 1: Introduction to the topic, the course, and NLP • Introduction to Colab Notebooks • Python Crash Course 1</h5>
                                     <p class="card-text">Module 1 will introduce the main topic of the course, give an overview on NLP and a crash course on Python using Colab Notebooks.</p>
-                                    <a href="modules/module_1.html" class="btn btn-primary mt-auto" onclick="toggleModule('module1')">View Details</a>
+                                    <a href="modules/module_1.html" class="btn btn-primary mt-auto">View Details</a>
                                     <p class="card-date mt-2 text-end">7. November 2025</p>
                                 </div>
                             </div>
@@ -151,7 +124,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title">Module 2: Python Crash Course 2 • Introduction to NLP with SpaCy, NLTK, and SKLEARN</h5>
                                     <p class="card-text">In this module, we'll explore how to leverage Colab Notebooks for data access and become data detectives using basic NLP tasks.</p>
-                                    <a href="modules/module_2.html" class="btn btn-primary mt-auto" onclick="toggleModule('module2')">View Details</a>
+                                    <a href="modules/module_2.html" class="btn btn-primary mt-auto">View Details</a>
                                     <p class="card-date mt-2 text-end">7. November 2025</p>
                                 </div>
                             </div>
@@ -162,7 +135,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title">Module 3: The German Newspaper Portal: Overview, API Usage, Data Lab</h5>
                                     <p class="card-text">This module gives background information to the the German Newspaper Portal, introduces to the API and gives an insight into the Data Lab.</p>
-                                    <a href="modules/module_3.html" class="btn btn-primary mt-auto" onclick="toggleModule('module3')">View Details</a>
+                                    <a href="modules/module_3.html" class="btn btn-primary mt-auto">View Details</a>
                                     <p class="card-date mt-2 text-end">14. November 2025</p>
                                 </div>
                             </div>
@@ -177,7 +150,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title">Module 4: Transformer Models for Semantic Search</h5>
                                     <p class="card-text">In Module 4 we investigate the variety of transformer models for NLP tasks as well as the semantic search possibilites for historical newspapers.</p>
-                                    <a href="modules/module_4.html" class="btn btn-primary mt-auto" onclick="toggleModule('module1')">View Details</a>
+                                    <a href="modules/module_4.html" class="btn btn-primary mt-auto">View Details</a>
                                     <p class="card-date mt-2 text-end">21. November 2025</p>
                                 </div>
                             </div>
@@ -188,7 +161,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title">Module 5: Large Language Models for Article Extraction and Post-OCR Correction</h5>
                                     <p class="card-text">In this module, we'll explore how Open-Access LLMs can be used for complex NLP tasks.</p>
-                                    <a href="modules/module_5.html" class="btn btn-primary mt-auto" onclick="toggleModule('module2')">View Details</a>
+                                    <a href="modules/module_5.html" class="btn btn-primary mt-auto">View Details</a>
                                     <p class="card-date mt-2 text-end">5. Dezember 2025</p>
                                 </div>
                             </div>
@@ -199,7 +172,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title">Module 6: Named Entity Recognition and Text Classification</h5>
                                     <p class="card-text">In this module we explore novel ways for NER (using Data Lab API's) and text classification.</p>
-                                    <a href="modules/module_6.html" class="btn btn-primary mt-auto" onclick="toggleModule('module3')">View Details</a>
+                                    <a href="modules/module_6.html" class="btn btn-primary mt-auto">View Details</a>
                                     <p class="card-date mt-2 text-end">12. Januar 2026</p>
                                 </div>
                             </div>
